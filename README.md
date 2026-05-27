@@ -1,6 +1,6 @@
 # Kanban
 
-A terminal‑first Kanban task app written in Rust. It ships with a CLI for quick edits and a rich TUI for day‑to‑day workflow. Data is stored locally in SQLite.
+A vibe‑coded, terminal‑first Kanban task app written in Rust. It ships with a CLI for quick edits and a rich TUI for day‑to‑day workflow. Data is stored locally in SQLite.
 
 ## Features
 
