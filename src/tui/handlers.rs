@@ -60,28 +60,36 @@ fn handle_normal_key(
             KeyCode::Left => {
                 let col = &app.columns[app.focused_col];
                 if let Some(todo) = col.todos.get(col.selected) {
+                    let todo_id = todo.id;
                     let next = if app.focused_col == 0 {
                         app.columns.len() - 1
                     } else {
                         app.focused_col - 1
                     };
                     let name = &app.columns[next].name;
-                    db::move_todo(conn, todo.id, name)?;
-                    app.status = format!(" Moved #{} to {}", todo.id, name);
+                    db::move_todo(conn, todo_id, name)?;
+                    app.status = format!(" Moved #{} to {}", todo_id, name);
                     app.reload(conn)?;
                     app.focused_col = next;
+                    if let Some(pos) = app.columns[next].todos.iter().position(|t| t.id == todo_id) {
+                        app.columns[next].selected = pos;
+                    }
                 }
                 return Ok(());
             }
             KeyCode::Right => {
                 let col = &app.columns[app.focused_col];
                 if let Some(todo) = col.todos.get(col.selected) {
+                    let todo_id = todo.id;
                     let next = (app.focused_col + 1) % app.columns.len();
                     let name = &app.columns[next].name;
-                    db::move_todo(conn, todo.id, name)?;
-                    app.status = format!(" Moved #{} to {}", todo.id, name);
+                    db::move_todo(conn, todo_id, name)?;
+                    app.status = format!(" Moved #{} to {}", todo_id, name);
                     app.reload(conn)?;
                     app.focused_col = next;
+                    if let Some(pos) = app.columns[next].todos.iter().position(|t| t.id == todo_id) {
+                        app.columns[next].selected = pos;
+                    }
                 }
                 return Ok(());
             }
@@ -184,12 +192,16 @@ fn handle_normal_key(
         KeyCode::Char('m') => {
             let col = &app.columns[app.focused_col];
             if let Some(todo) = col.todos.get(col.selected) {
+                let todo_id = todo.id;
                 let next = (app.focused_col + 1) % app.columns.len();
                 let name = &app.columns[next].name;
-                db::move_todo(conn, todo.id, name)?;
-                app.status = format!(" Moved #{} to {}", todo.id, name);
+                db::move_todo(conn, todo_id, name)?;
+                app.status = format!(" Moved #{} to {}", todo_id, name);
                 app.reload(conn)?;
                 app.focused_col = next;
+                if let Some(pos) = app.columns[next].todos.iter().position(|t| t.id == todo_id) {
+                    app.columns[next].selected = pos;
+                }
             }
         }
         KeyCode::Char('r') => {
@@ -228,27 +240,35 @@ fn handle_normal_key(
         KeyCode::Char('H') => {
             let col = &app.columns[app.focused_col];
             if let Some(todo) = col.todos.get(col.selected) {
+                let todo_id = todo.id;
                 let next = if app.focused_col == 0 {
                     app.columns.len() - 1
                 } else {
                     app.focused_col - 1
                 };
                 let name = &app.columns[next].name;
-                db::move_todo(conn, todo.id, name)?;
-                app.status = format!(" Moved #{} to {}", todo.id, name);
+                db::move_todo(conn, todo_id, name)?;
+                app.status = format!(" Moved #{} to {}", todo_id, name);
                 app.reload(conn)?;
                 app.focused_col = next;
+                if let Some(pos) = app.columns[next].todos.iter().position(|t| t.id == todo_id) {
+                    app.columns[next].selected = pos;
+                }
             }
         }
         KeyCode::Char('L') => {
             let col = &app.columns[app.focused_col];
             if let Some(todo) = col.todos.get(col.selected) {
+                let todo_id = todo.id;
                 let next = (app.focused_col + 1) % app.columns.len();
                 let name = &app.columns[next].name;
-                db::move_todo(conn, todo.id, name)?;
-                app.status = format!(" Moved #{} to {}", todo.id, name);
+                db::move_todo(conn, todo_id, name)?;
+                app.status = format!(" Moved #{} to {}", todo_id, name);
                 app.reload(conn)?;
                 app.focused_col = next;
+                if let Some(pos) = app.columns[next].todos.iter().position(|t| t.id == todo_id) {
+                    app.columns[next].selected = pos;
+                }
             }
         }
         KeyCode::Tab | KeyCode::Right | KeyCode::Char('l') => {
