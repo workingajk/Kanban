@@ -2,6 +2,10 @@
 
 A vibe‑coded, terminal‑first Kanban task app written in Rust. It ships with a CLI for quick edits and a rich TUI for day‑to‑day workflow. Data is stored locally in SQLite.
 
+<div style="text-align: center;">
+    <img src="images/UI.png" alt="Kanban Board" width="75%"/>
+</div>
+
 ## Features
 
 - **Four built‑in columns**: `backlog`, `todo`, `in-progress`, `done`
